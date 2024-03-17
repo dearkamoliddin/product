@@ -41,9 +41,9 @@ def category_table():
         old_data = input("Old Data: ")
         new_data = input("New Data: ")
         if column_name.lower() == "id":
-            print(Category.update_id(int(old_data), int(new_data)))
+            print(Category.update_id("category", column_name, int(old_data), int(new_data)))
         else:
-            print(Category.update(column_name.lower(), old_data, new_data))
+            print(Category.update("category", column_name.lower(), old_data, new_data))
 
         return category_table()
 
@@ -102,10 +102,10 @@ def product_table():
         column_name = input("Column Name: ")
         old_data = input("Old Data: ")
         new_data = input("New Data: ")
-        if column_name.lower() == "id" or column_name.lower() == "category id":
-            print(Product.update_id(int(old_data), int(new_data)))
+        if column_name.lower() == "id":
+            print(Product.update_id("product", column_name, int(old_data), int(new_data)))
         else:
-            print(Product.update(column_name.lower(), old_data, new_data))
+            print(Product.update("product", column_name.lower(), old_data, new_data))
 
         return product_table()
 
@@ -162,9 +162,9 @@ def color_table():
         old_data = input("Old Data: ")
         new_data = input("New Data: ")
         if column_name.lower() == "id":
-            print(Color.update_id(int(old_data), int(new_data)))
+            print(Color.update_id("color", column_name, int(old_data), int(new_data)))
         else:
-            print(Color.update(column_name.lower(), old_data, new_data))
+            print(Color.update("color", column_name.lower(), old_data, new_data))
 
         return color_table()
 
@@ -233,9 +233,9 @@ def product_detail_table():
         old_data = input("Old Data: ")
         new_data = input("New Data: ")
         if column_name.lower() == "id":
-            print(ProductDetail.update_id(int(old_data), int(new_data)))
+            print(ProductDetail.update_id("product_detail", column_name, int(old_data), int(new_data)))
         else:
-            print(ProductDetail.update(column_name.lower(), old_data, new_data))
+            print(ProductDetail.update("product_detail", column_name.lower(), old_data, new_data))
 
         return product_detail_table()
 
@@ -292,9 +292,9 @@ def country_table():
         old_data = input("Old Data: ")
         new_data = input("New Data: ")
         if column_name.lower() == "id":
-            print(Country.update_id(int(old_data), int(new_data)))
+            print(Country.update_id("country", column_name, int(old_data), int(new_data)))
         else:
-            print(Country.update(column_name.lower(), old_data, new_data))
+            print(Country.update("country", column_name.lower(), old_data, new_data))
 
         return country_table()
 
@@ -353,9 +353,9 @@ def city_table():
         old_data = input("Old Data: ")
         new_data = input("New Data: ")
         if column_name.lower() == "id":
-            print(City.update_id(int(old_data), int(new_data)))
+            print(City.update_id("city", column_name, int(old_data), int(new_data)))
         else:
-            print(City.update(column_name.lower(), old_data, new_data))
+            print(City.update("city", column_name.lower(), old_data, new_data))
 
         return city_table()
 
@@ -414,9 +414,9 @@ def address_table():
         old_data = input("Old Data: ")
         new_data = input("New Data: ")
         if column_name.lower() == "id":
-            print(Address.update_id(int(old_data), int(new_data)))
+            print(Address.update_id("address", column_name, int(old_data), int(new_data)))
         else:
-            print(Address.update(column_name.lower(), old_data, new_data))
+            print(Address.update("address", column_name.lower(), old_data, new_data))
 
         return address_table()
 
@@ -483,9 +483,9 @@ def customer_table():
         old_data = input("Old Data: ")
         new_data = input("New Data: ")
         if column_name.lower() == "id":
-            print(Customer.update_id(int(old_data), int(new_data)))
+            print(Customer.update_id("customer", column_name, int(old_data), int(new_data)))
         else:
-            print(Customer.update(column_name.lower(), old_data, new_data))
+            print(Customer.update("customer", column_name.lower(), old_data, new_data))
 
         return customer_table()
 
@@ -544,9 +544,9 @@ def official_detail_table():
         old_data = input("Old Data: ")
         new_data = input("New Data: ")
         if column_name.lower() == "id":
-            print(OfficialDetail.update_id(int(old_data), int(new_data)))
+            print(OfficialDetail.update_id("official_detail", column_name, int(old_data), int(new_data)))
         else:
-            print(OfficialDetail.update(column_name.lower(), old_data, new_data))
+            print(OfficialDetail.update("official_detail", column_name.lower(), old_data, new_data))
 
         return official_detail_table()
 
@@ -603,9 +603,9 @@ def payment_status_table():
         old_data = input("Old Data: ")
         new_data = input("New Data: ")
         if column_name.lower() == "id":
-            print(PaymentStatus.update_id(int(old_data), int(new_data)))
+            print(PaymentStatus.update_id("payment_status", column_name, int(old_data), int(new_data)))
         else:
-            print(PaymentStatus.update(column_name.lower(), old_data, new_data))
+            print(PaymentStatus.update("payment_status", column_name.lower(), old_data, new_data))
 
         return payment_status_table()
 
@@ -662,9 +662,9 @@ def payment_type_table():
         old_data = input("Old Data: ")
         new_data = input("New Data: ")
         if column_name.lower() == "id":
-            print(PaymentType.update_id(int(old_data), int(new_data)))
+            print(PaymentType.update_id("payment_type", column_name, int(old_data), int(new_data)))
         else:
-            print(PaymentType.update(column_name.lower(), old_data, new_data))
+            print(PaymentType.update("payment_type", column_name.lower(), old_data, new_data))
 
         return payment_type_table()
 
@@ -727,9 +727,9 @@ def payment_table():
         old_data = input("Old Data: ")
         new_data = input("New Data: ")
         if column_name.lower() == "id":
-            print(Payment.update_id(int(old_data), int(new_data)))
+            print(Payment.update_id("payment", column_name, int(old_data), int(new_data)))
         else:
-            print(Payment.update(column_name.lower(), old_data, new_data))
+            print(Payment.update("payment", column_name.lower(), old_data, new_data))
 
         return payment_table()
 
@@ -788,9 +788,9 @@ def store_table():
         old_data = input("Old Data: ")
         new_data = input("New Data: ")
         if column_name.lower() == "id":
-            print(Store.update_id(int(old_data), int(new_data)))
+            print(Store.update_id("store", column_name, int(old_data), int(new_data)))
         else:
-            print(Store.update(column_name.lower(), old_data, new_data))
+            print(Store.update("store", column_name.lower(), old_data, new_data))
 
         return store_table()
 

@@ -9,17 +9,23 @@ class Base:
         return Database.connect(query, "select")
 
     @staticmethod
-    def delete_id(table, id):
-        query = f"DELETE FROM {table} WHERE {table}_id = {id}"
-        Database.connect(query, "delete")
+    def update_id(table, column_name, old_data, new_data):
+        query = f"UPDATE {table} SET {column_name} = {new_data} WHERE {column_name} = {old_data}"
+        return Database.connect(query, "update")
+
+    @staticmethod
+    def update(table, column_name, old_data, new_data):
+        query = f"UPDATE {table} SET {column_name} = '{new_data}' WHERE {column_name} = '{old_data}'"
+        return Database.connect(query, "update")
+
+    @staticmethod
+    def delete_id(table, data):
+        query = f"DELETE FROM {table} WHERE {table}_id = {data}"
+        return Database.connect(query, "delete")
 
     @staticmethod
     def delete(table, column_name, data):
-        if type(data) == int:
-            query = f"DELETE FROM {table} WHERE {column_name} = {data}"
-        else:
-            query = f"DELETE FROM {table} WHERE {column_name} = '{data}'"
-
+        query = f"DELETE FROM {table} WHERE {column_name} = '{data}'"
         return Database.connect(query, "delete")
 
 
@@ -33,29 +39,6 @@ class Category(Base):
         query = f"INSERT INTO {self.table_name}(name, last_update) VALUES('{self.name}', '{self.last_updated}')"
         return Database.connect(query, "insert")
 
-    @staticmethod
-    def update_id(id, new_id):
-        query = f"UPDATE category SET category_id = {new_id} WHERE category_id = {id}"
-        return Database.connect(query, "update")
-
-    @staticmethod
-    def update(column_name, old_data, new_data):
-        if type(old_data) == int:
-            query = f"UPDATE category SET {column_name} = {new_data} WHERE {column_name} = {old_data}"
-        else:
-            query = f"UPDATE category SET {column_name} = '{new_data}' WHERE {column_name} = '{old_data}'"
-
-        return Database.connect(query, "update")
-
-    # @staticmethod
-    # def delete_category(column_name, value):
-    #     if type(column_name) == int:
-    #         query = f"DELETE FROM category WHERE {column_name} = {value}"
-    #     else:
-    #         query = f"DELETE FROM category WHERE {column_name} = '{value}'"
-    #
-    #     return Database.connect(query, "delete")
-
 
 class Product(Base):
     def __init__(self, product_name, category_id):
@@ -67,20 +50,6 @@ class Product(Base):
         query = f"INSERT INTO product(name, category_id) VALUES('{self.product_name}', {self.category_id})"
         return Database.connect(query, "insert")
 
-    @staticmethod
-    def update_id(id, new_id):
-        query = f"UPDATE product SET product_id = {new_id} WHERE product_id = {id}"
-        return Database.connect(query, "update")
-
-    @staticmethod
-    def update(column_name, old_data, new_data):
-        if type(old_data) == int:
-            query = f"UPDATE product SET {column_name} = {new_data} WHERE {column_name} = {old_data}"
-        else:
-            query = f"UPDATE product SET {column_name} = '{new_data}' WHERE {column_name} = '{old_data}'"
-
-        return Database.connect(query, "update")
-
 
 class Color(Base):
     def __init__(self, name):
@@ -90,20 +59,6 @@ class Color(Base):
     def insert(self):
         query = f"INSERT INTO color(name) VALUES('{self.name}')"
         return Database.connect(query, "insert")
-
-    @staticmethod
-    def update_id(id, new_id):
-        query = f"UPDATE color SET color_id = {new_id} WHERE color_id = {id}"
-        return Database.connect(query, "update")
-
-    @staticmethod
-    def update(column_name, old_data, new_data):
-        if type(old_data) == int:
-            query = f"UPDATE color SET {column_name} = {new_data} WHERE {column_name} = {old_data}"
-        else:
-            query = f"UPDATE color SET name = '{new_data}' WHERE name = '{old_data}'"
-
-        return Database.connect(query, "update")
 
 
 class ProductDetail(Base):
@@ -123,20 +78,6 @@ class ProductDetail(Base):
         VALUES('{self.name}', '{self.description}', {self.price}, {self.color_id}, {self.count}, {self.product_id}, {self.rating})"""
         return Database.connect(query, "insert")
 
-    @staticmethod
-    def update_id(id, new_id):
-        query = f"UPDATE product_detail SET product_detail_id = {new_id} WHERE product_detail_id = {id}"
-        return Database.connect(query, "update")
-
-    @staticmethod
-    def update(column_name, old_data, new_data):
-        if type(old_data) == int:
-            query = f"UPDATE product_detail SET {column_name} = {new_data} WHERE {column_name} = {old_data}"
-        else:
-            query = f"UPDATE product_detail SET {column_name} = '{new_data}' WHERE {column_name} = '{old_data}'"
-
-        return Database.connect(query, "update")
-
 
 class Country(Base):
     def __init__(self, name):
@@ -146,20 +87,6 @@ class Country(Base):
     def insert(self):
         query = f"""INSERT INTO country(name) VALUES('{self.name}')"""
         return Database.connect(query, "insert")
-
-    @staticmethod
-    def update_id(id, new_id):
-        query = f"UPDATE country SET country_id = {new_id} WHERE country_id = {id}"
-        return Database.connect(query, "update")
-
-    @staticmethod
-    def update(column_name, old_data, new_data):
-        if type(old_data) == int:
-            query = f"UPDATE country SET {column_name} = {new_data} WHERE {column_name} = {old_data}"
-        else:
-            query = f"UPDATE country SET {column_name} = '{new_data}' WHERE {column_name} = '{old_data}'"
-
-        return Database.connect(query, "update")
 
 
 class City(Base):
@@ -172,20 +99,6 @@ class City(Base):
         query = f"""INSERT INTO city(name, country_id) VALUES('{self.name}', {self.country_id})"""
         return Database.connect(query, "insert")
 
-    @staticmethod
-    def update_id(id, new_id):
-        query = f"UPDATE city SET city_id = {new_id} WHERE city_id = {id}"
-        return Database.connect(query, "update")
-
-    @staticmethod
-    def update(column_name, old_data, new_data):
-        if type(old_data) == int:
-            query = f"UPDATE city SET {column_name} = {new_data} WHERE {column_name} = {old_data}"
-        else:
-            query = f"UPDATE city SET {column_name} = '{new_data}' WHERE {column_name} = '{old_data}'"
-
-        return Database.connect(query, "update")
-
 
 class Address(Base):
     def __init__(self, name, city_id):
@@ -196,20 +109,6 @@ class Address(Base):
     def insert(self):
         query = f"""INSERT INTO address(name, city_id) VALUES('{self.name}', {self.city_id})"""
         return Database.connect(query, "insert")
-
-    @staticmethod
-    def update_id(id, new_id):
-        query = f"UPDATE address SET address_id = {new_id} WHERE address_id = {id}"
-        return Database.connect(query, "update")
-
-    @staticmethod
-    def update(column_name, old_data, new_data):
-        if type(old_data) == int:
-            query = f"UPDATE address SET {column_name} = {new_data} WHERE {column_name} = {old_data}"
-        else:
-            query = f"UPDATE address SET {column_name} = '{new_data}' WHERE {column_name} = '{old_data}'"
-
-        return Database.connect(query, "update")
 
 
 class Customer(Base):
@@ -228,20 +127,6 @@ class Customer(Base):
         VALUES('{self.first_name}', '{self.last_name}', '{self.password}', '{self.email}', '{self.birth_date}', {self.address_id})"""
         return Database.connect(query, "insert")
 
-    @staticmethod
-    def update_id(id, new_id):
-        query = f"UPDATE customer SET customer_id = {new_id} WHERE customer_id = {id}"
-        return Database.connect(query, "update")
-
-    @staticmethod
-    def update(column_name, old_data, new_data):
-        if type(old_data) == int:
-            query = f"UPDATE customer SET {column_name} = {new_data} WHERE {column_name} = {old_data}"
-        else:
-            query = f"UPDATE customer SET {column_name} = '{new_data}' WHERE {column_name} = '{old_data}'"
-
-        return Database.connect(query, "update")
-
 
 class OfficialDetail(Base):
     def __init__(self, product_id, customer_id):
@@ -253,20 +138,6 @@ class OfficialDetail(Base):
         query = f"""INSERT INTO official_detail(product_id, customer_id) VALUES({self.product_id}, {self.customer_id})"""
         return Database.connect(query, "insert")
 
-    @staticmethod
-    def update_id(id, new_id):
-        query = f"UPDATE official_detail SET official_detail_id = {new_id} WHERE official_detail_id = {id}"
-        return Database.connect(query, "update")
-
-    @staticmethod
-    def update(column_name, old_data, new_data):
-        if type(old_data) == int:
-            query = f"UPDATE official_detail SET {column_name} = {new_data} WHERE {column_name} = {old_data}"
-        else:
-            query = f"UPDATE official_detail SET {column_name} = {new_data} WHERE {column_name} = {old_data}"
-
-        return Database.connect(query, "update")
-
 
 class PaymentStatus(Base):
     def __init__(self, name):
@@ -277,20 +148,6 @@ class PaymentStatus(Base):
         query = f"""INSERT INTO payment_status(name) VALUES('{self.name}')"""
         return Database.connect(query, "insert")
 
-    @staticmethod
-    def update_id(id, new_id):
-        query = f"UPDATE payment_status SET payment_status_id = {new_id} WHERE payment_status_id = {id}"
-        return Database.connect(query, "update")
-
-    @staticmethod
-    def update(column_name, old_data, new_data):
-        if type(old_data) == int:
-            query = f"UPDATE payment_status SET {column_name} = {new_data} WHERE {column_name} = {old_data}"
-        else:
-            query = f"UPDATE payment_status SET {column_name} = '{new_data}' WHERE {column_name} = '{old_data}'"
-
-        return Database.connect(query, "update")
-
 
 class PaymentType(Base):
     def __init__(self, name):
@@ -300,20 +157,6 @@ class PaymentType(Base):
     def insert(self):
         query = f"""INSERT INTO payment_type(name) VALUES('{self.name}')"""
         return Database.connect(query, "insert")
-
-    @staticmethod
-    def update_id(id, new_id):
-        query = f"UPDATE payment_type SET payment_type_id = {new_id} WHERE payment_type_id = {id}"
-        return Database.connect(query, "update")
-
-    @staticmethod
-    def update(column_name, old_data, new_data):
-        if type(old_data) == int:
-            query = f"UPDATE payment_type SET {column_name} = {new_data} WHERE {column_name} = {old_data}"
-        else:
-            query = f"UPDATE payment_type SET {column_name} = '{new_data}' WHERE {column_name} = '{old_data}'"
-
-        return Database.connect(query, "update")
 
 
 class Payment(Base):
@@ -351,20 +194,6 @@ class Payment(Base):
         VALUES({self.amount}, {self.official_detail_id}, {self.payment_status_id}, {self.payment_type_id});"""
         return Database.connect(query, "insert")
 
-    @staticmethod
-    def update_id(id, new_id):
-        query = f"UPDATE payment SET payment_id = {new_id} WHERE payment_id = {id}"
-        return Database.connect(query, "update")
-
-    @staticmethod
-    def update(column_name, old_data, new_data):
-        if type(old_data) == int:
-            query = f"UPDATE payment SET {column_name} = {new_data} WHERE {column_name} = {old_data}"
-        else:
-            query = f"UPDATE payment SET {column_name} = '{new_data}' WHERE {column_name} = '{old_data}'"
-
-        return Database.connect(query, "update")
-
 
 class Store(Base):
     def __init__(self, name, address_id):
@@ -375,18 +204,4 @@ class Store(Base):
     def insert(self):
         query = f"""INSERT INTO store(name, address_id) VALUES('{self.name}', {self.address_id})"""
         return Database.connect(query, "insert")
-
-    @staticmethod
-    def update_id(id, new_id):
-        query = f"UPDATE store SET store_id = {new_id} WHERE store_id = {id}"
-        return Database.connect(query, "update")
-
-    @staticmethod
-    def update(column_name, old_data, new_data):
-        if type(old_data) == int:
-            query = f"UPDATE store SET {column_name} = {new_data} WHERE {column_name} = {old_data}"
-        else:
-            query = f"UPDATE store SET {column_name} = '{new_data}' WHERE {column_name} = '{old_data}'"
-
-        return Database.connect(query, "update")
 
